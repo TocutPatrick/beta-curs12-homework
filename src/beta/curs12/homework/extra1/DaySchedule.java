@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DaySchedule {
-    private DaysOfWeek daysOfWeek;
-    private List<String> activities;
+    private Day day;
+    private final List<String> activities = new ArrayList<>();
 
-    public DaySchedule(DaysOfWeek daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
-        this.activities = new ArrayList<>();
+    public DaySchedule(Day day) {
+        this.day = day;
     }
 
-    public DaysOfWeek getDaysOfWeek() {
-        return daysOfWeek;
+    public Day getDaysOfWeek() {
+        return day;
     }
 
     public List<String> getActivities() {
@@ -31,7 +30,7 @@ public class DaySchedule {
     @Override
     public String toString() {
         return "DaySchedule: " +
-                daysOfWeek +
+                day +
                 "-> activities " + activities;
     }
 }

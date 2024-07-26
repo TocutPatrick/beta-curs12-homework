@@ -10,53 +10,55 @@ public class DailyPlanner {
 
     public DailyPlanner() {
         this.daySchedule = new ArrayList<>();
-        for (DaysOfWeek day : DaysOfWeek.values()) {
+        for (Day day : Day.values()) {
             daySchedule.add(new DaySchedule(day));
         }
     }
 
-    public void getDaySchedule() {
+    public List<String> getDaySchedule() {
+        List<String> list = new ArrayList<>();
         for (DaySchedule ds : daySchedule) {
-            System.out.println(ds.getDaysOfWeek() + " -> " + ds.getActivities());
+            list.add(ds.getDaysOfWeek() + " -> " + ds.getActivities());
         }
+        return list;
     }
 
-    public void addActivity(DaysOfWeek daysOfWeek, String activity) {
+    public void addActivity(Day day, String activity) {
         if (activity == null) {
             throw new NoActivityException("Activity is null");
         }
         for (DaySchedule ds : daySchedule) {
-            if (ds.getDaysOfWeek().equals(daysOfWeek)) {
+            if (ds.getDaysOfWeek().equals(day)) {
                 ds.addActivity(activity);
             }
         }
     }
 
-    public void removeActivity(DaysOfWeek daysOfWeek, String activity) {
+    public void removeActivity(Day day, String activity) {
         for (DaySchedule ds : daySchedule) {
             for (String ac : ds.getActivities()) {
                 if (ac.equalsIgnoreCase(activity)) {
                     throw new NoActivityException("Activity doesn't exist");
                 }
             }
-            if (ds.getDaysOfWeek().equals(daysOfWeek)) {
+            if (ds.getDaysOfWeek().equals(day)) {
                 ds.removeActivity(activity);
             }
         }
     }
 
-    public List<String> getActivities(DaysOfWeek daysOfWeek) {
+    public List<String> getActivities(Day day) {
         List<String> toDo = new ArrayList<>();
         for (DaySchedule ds : daySchedule) {
-            if (ds.getDaysOfWeek().equals(daysOfWeek)) {
+            if (ds.getDaysOfWeek().equals(day)) {
                 toDo.add(ds.toString());
             }
         }
         return toDo;
     }
 
-    public Map<DaysOfWeek, List<String>> endPlanning() throws NoActivitiesForDay {
-        Map<DaysOfWeek, List<String>> map = new HashMap<>();
+    public Map<Day, List<String>> endPlanning() throws NoActivitiesForDay {
+        Map<Day, List<String>> map = new HashMap<>();
         for (DaySchedule ds : daySchedule) {
             if (ds.getActivities().isEmpty()) {
                 throw new NoActivitiesForDay("No activities for " + ds.getDaysOfWeek());

@@ -3,24 +3,23 @@ package beta.curs12.homework.ex3;
 import java.util.ArrayList;
 import java.util.List;
 
-public record IntTools(
-        int number
-) {
-    public IntTools {
+public class IntTools {
+    private int number;
+    private List<Integer> numberList;
 
-    }
-
-    public List<Integer> numberList(int n) {
-        List<Integer> list = new ArrayList<>();
-        while (n > 0) {
-            list.add(n % 10);
-            n /= 10;
+    public IntTools (int number){
+        this.number = number;
+        this.numberList = new ArrayList<>();
+        while (number > 0) {
+            numberList.add(number % 10);
+            number /= 10;
         }
-        return list.reversed();
     }
+
+
 
     public int digitSum() {
-        List<Integer> list = numberList(number);
+        List<Integer> list = numberList.reversed();
         int sum = 0;
         for (Integer i : list) {
             sum += i;
@@ -29,13 +28,13 @@ public record IntTools(
     }
 
     public int lastDigit() {
-        List<Integer> list = numberList(number);
+        List<Integer> list = numberList.reversed();
         return list.getLast();
     }
 
     public int digitAt(int position) throws NumberException {
         int digit = 0;
-        List<Integer> list = numberList(number);
+        List<Integer> list = numberList.reversed();
         if (position < 0 || position > list.size() - 1) {
             throw new NumberException("Error. Searched position do not exist");
         }
