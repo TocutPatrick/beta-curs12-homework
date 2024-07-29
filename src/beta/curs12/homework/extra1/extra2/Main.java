@@ -62,10 +62,7 @@ public class Main {
 
     private static Day daysOfWeek(String day) throws InvalidDay {
         try {
-            Day dayEnum = Day.valueOf(day.toUpperCase());
-            return switch (dayEnum) {
-                case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY -> dayEnum;
-            };
+            return Day.valueOf(day.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new InvalidDay("Invalid day input: " + day);
         }
