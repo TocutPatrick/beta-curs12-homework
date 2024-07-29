@@ -16,7 +16,7 @@ public class DaySchedule {
     }
 
     public List<String> getActivities() {
-        return activities;
+        return new ArrayList<>(activities);
     }
 
     public void addActivity(String activity) {

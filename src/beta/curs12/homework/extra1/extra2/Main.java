@@ -16,9 +16,9 @@ public class Main {
                 System.out.println("Planner App");
                 System.out.print("""
                         1) Add an activity
-                        2)Remove an activity
-                        3)List all activities
-                        4)End planning
+                        2) Remove an activity
+                        3) List all activities
+                        4) End planning
                         """);
                 System.out.print("Enter number for command: ");
                 response = scan.nextInt();
@@ -41,7 +41,7 @@ public class Main {
                     case 3 -> System.out.println(plan.getDaySchedule());
                 }
                 if (response > 4) {
-                    throw new NoCommandForNumber("Inccorect input");
+                    throw new NoCommandForNumber("Incorrect input");
                 }
             } catch (NoCommandForNumber | InvalidDay e) {
                 System.out.println(e.getMessage());
@@ -52,22 +52,22 @@ public class Main {
 
     private static String activityResponse() {
         Scanner scan = new Scanner(System.in);
-        String day = scan.next();
-        return day;
+        return scan.next();
     }
 
     private static String dayResponse() {
         Scanner scan = new Scanner(System.in);
-        String activity = scan.next();
-        return activity;
+        return scan.next();
     }
 
     private static Day daysOfWeek(String day) throws InvalidDay {
-        Day dayEnum = Day.valueOf(day.toUpperCase());
-
-        return switch (dayEnum) {
-            case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY -> dayEnum;
-            default -> throw new InvalidDay("Invalid day: " + day);
-        };
+        try {
+            Day dayEnum = Day.valueOf(day.toUpperCase());
+            return switch (dayEnum) {
+                case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY -> dayEnum;
+            };
+        } catch (IllegalArgumentException e) {
+            throw new InvalidDay("Invalid day input: " + day);
+        }
     }
 }

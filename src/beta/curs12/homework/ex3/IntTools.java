@@ -5,21 +5,19 @@ import java.util.List;
 
 public class IntTools {
     private int number;
-    private List<Integer> numberList;
+    private List<Integer> numberDigits;
 
     public IntTools (int number){
         this.number = number;
-        this.numberList = new ArrayList<>();
+        this.numberDigits = new ArrayList<>();
         while (number > 0) {
-            numberList.add(number % 10);
+            numberDigits.add(number % 10);
             number /= 10;
         }
     }
 
-
-
     public int digitSum() {
-        List<Integer> list = numberList.reversed();
+        List<Integer> list = numberDigits.reversed();
         int sum = 0;
         for (Integer i : list) {
             sum += i;
@@ -28,13 +26,13 @@ public class IntTools {
     }
 
     public int lastDigit() {
-        List<Integer> list = numberList.reversed();
+        List<Integer> list = numberDigits.reversed();
         return list.getLast();
     }
 
     public int digitAt(int position) throws NumberException {
         int digit = 0;
-        List<Integer> list = numberList.reversed();
+        List<Integer> list = numberDigits.reversed();
         if (position < 0 || position > list.size() - 1) {
             throw new NumberException("Error. Searched position do not exist");
         }
